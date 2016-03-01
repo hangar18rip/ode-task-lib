@@ -1,0 +1,101 @@
+{
+  "manifestVersion": 1,
+  "id": "build-release-activies__TargetVersion__",
+  "version": "__Build_BuildNumber__",
+  "name": "Build & Release Activities",
+  "scopes": [ "vso.work", "vso.work_write" ],
+  "description": "This is the extension file from the contributions guide example on GitHub.  Feel free to add or remove sections as you see fit.",
+  "baseUri": "https://github.com/hangar18rip/ode-task-lib",
+  "publisher": "hangar18",
+  "public": false,
+  "icons": {
+    "default": "img/fb.jpg"
+  },
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "tags": [
+    "Build",
+    "Release"
+  ],
+  "links": {
+    "home": {
+      "uri": "https://github.com/hangar18rip/ode-task-lib"
+    },
+    "getstarted": {
+      "uri": "https://github.com/hangar18rip/ode-task-lib"
+    },
+    "learn": {
+      "uri": "https://github.com/hangar18rip/ode-task-lib"
+    },
+    "support": {
+      "uri": "https://github.com/hangar18rip/ode-task-lib"
+    },
+    "repository": {
+      "uri": "https://github.com/hangar18rip/ode-task-lib"
+    },
+    "issues": {
+      "uri": "https://github.com/hangar18rip/ode-task-lib"
+    }
+  },
+  "branding": {
+    "color": "rgb(220, 235, 252)",
+    "theme": "light"
+  },
+  "files": [
+    {
+      "path": "img"
+    },
+    {
+      "path": "tasks"
+    }
+  ],
+  "categories": [
+    "Build and release"
+  ],
+  "contributions": [
+    {
+      "id": "resolvetoken-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/Resolve-Token"
+      }
+    },
+    {
+      "id": "new-azureenvironment-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/New-AzureEnvironment"
+      }
+    },
+    {
+      "id": "update-versionfiles",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/Update-VersionFiles"
+      }
+    },
+    {
+      "id": "upload-tfstask",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "tasks/Upload-TfsTask"
+      }
+    }
+
+  ]
+}

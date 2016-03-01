@@ -1,0 +1,78 @@
+{
+  "id": "8D9503C3-1F63-4ACC-BAA6-B1791FA99DB3",
+  "name": "UpdateVersionFiles",
+  "friendlyName": "Update version files",
+  "description": "Update version files",
+  "helpMarkDown": "v0.0.121 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Verison-AssemblyInfo.md)",
+  "category": "Build",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "author": "Hangar 18",
+  "version": {
+"Major": 0,
+"Minor": 0,
+"Patch": 121
+  },
+  "demands": [
+    "node.js"
+  ],
+  "minimumAgentVersion": "1.0.0",
+  "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+  ],
+  "instanceNameFormat": "Verison-AssemblyInfo",
+  "inputs": [
+    {
+      "name": "sourcePath",
+      "type": "string",
+      "label": "Directory where to search assembly info files",
+      "defaultValue": "",
+      "helpMarkDown": "Path to the file containing tokens.",
+      "required": true
+    },
+    {
+      "name": "filePattern",
+      "type": "string",
+      "label": "Files to look for",
+      "defaultValue": "*assemblyinfo.*",
+      "required": true
+    },
+    {
+      "name": "buildRegex",
+      "type": "string",
+      "label": "Build Regex",
+      "defaultValue": "\\d+\\.\\d+\\.\\d+\\.\\d+",
+      "helpMarkDown": "Regex to use for token replacement. Must include a group match.",
+      "required": true
+    },
+    {
+      "name": "replaceRegex",
+      "type": "string",
+      "label": "Replace Regex",
+      "defaultValue": "",
+      "helpMarkDown": "Regex to use for token replacement. Must include a group match.",
+      "groupName": "advanced"
+    },
+    {
+      "name": "buildNumber",
+      "type": "string",
+      "label": "Build number",
+      "defaultValue": "$(build.buildnumber)",
+      "required": true,
+      "groupName": "advanced"
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\Update-VersionFiles.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+﻿{
+"package": {
+		"manifestGlobs": ["vss-extension.json"]
+	},
+  "publish": {
+    "galleryUrl": "https://marketplace.visualstudio.com/",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJjaWQiOiI4OWUwZDlhYS00MjYwLTRkNDItYmYxYy02MmNlMGU3ODg1NTIiLCJjc2kiOiIyODI0M2RiMi1iODFkLTQzYmUtYmYxNC1lMmY5NThhY2RjNmQiLCJuYW1laWQiOiIwMDAwMDAyOS0wMDAwLTg4ODgtODAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNDU1MDMxMDIzLCJleHAiOjE2MTI3MTEwMjN9.c-7CzN1cM4yKQvHkvmarYFv7tenfGinZ9r-U0-tWPBd-Q8rg1d90MZ5kb2-jbw-ieitr6_dcJrGT1aPgu01h5kcy1Wu4y47Zh1nKzGqghqXARwM40vXTzU9JpMFEBBzuWZnyglmlENVWISQdGIvvT9yFyRSvsrY36F7o2coxgPbaZwJKYQPCm7IUhTdS1C9wcy4WIIQan4n_Y0S-7aS4qYAdHmo37cTHn-tqtK9mWy5CgOKI5J8HVg7zLdLiOlhmsNajpbNkr9hFOJLFDI6aS0wLgnWZkEBY0kzfyTuki1-mr0_GxHh6deUrL34KAiIDT2zFEIaRQf2FOYojVeIFQg",
+    "publisher": "hangar18"
+  }
+}

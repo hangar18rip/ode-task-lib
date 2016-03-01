@@ -1,0 +1,77 @@
+{
+  "id": "38A88FC8-90E4-41A0-B08B-92C2E344A527",
+  "name": "ResolveTokens",
+  "friendlyName": "Resolve Tokens",
+  "description": "Resolves tokens in text file",
+  "helpMarkDown": "v0.0.125 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Resolve-Token.md)",
+  "category": "Deploy",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "author": "Hangar 18",
+  "version": {
+"Major": 0,
+"Minor": 0,
+"Patch": 125
+  },
+  "minimumAgentVersion": "1.95.0",
+  "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+  ],
+  "instanceNameFormat": "Resolve tokens in $(filePath)",
+  "inputs": [
+    {
+      "name": "filePath",
+      "type": "filePath",
+      "label": "Target file",
+      "defaultValue": "",
+      "helpMarkDown": "Path to the file containing tokens.",
+      "required": true
+    },
+    {
+      "name": "warningAsError",
+      "type": "boolean",
+      "label": "Warning as error",
+      "defaultValue": "true"
+    },
+    {
+      "name": "tokenRegex",
+      "type": "string",
+      "label": "Token Regex",
+      "defaultValue": "(__([\\w]+)__)",
+      "helpMarkDown": "Regex to use for token replacement. Must include a group match for the whole tokenized parameter and another one for the token name.",
+      "required": true,
+      "groupName": "advanced"
+    },
+    {
+      "name": "fileEncoding",
+      "type": "pickList",
+      "label": "File encoding",
+      "required": false,
+      "groupName": "advanced",
+      "defaultValue": "Default",
+      "helpMarkDown": "Encoding used to manipulate the file",
+      "options": {
+        "Default": "Default",
+        "Unicode": "Unicode",
+        "UTF8": "UTF8",
+        "UTF32": "UTF32",
+        "Unknown": "Unknown"
+
+      }
+    }
+  ],
+
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\Resolve-Token.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(system.defaultworkingdirectory)"
+    }
+  }
+}

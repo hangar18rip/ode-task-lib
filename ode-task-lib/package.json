@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "tfx-cli": "~0.3.10",
+    "tsd": "~0.6.5",
+    "vss-sdk": "^0.91.3"
+  },
+  "name": "Build & Release Extensions",
+  "private": true,
+  "version": "0.0.1"
+}
