@@ -46,9 +46,9 @@
     <Content Include="tasks\New-AzureEnvironment\version.txt" />
     <Content Include="tasks\Resolve-Token\icon.png" />
     <Content Include="tasks\Resolve-Token\version.txt" />
-    <Content Include="tasks\Update-VersionFiles\version.txt" />
+    <Content Include="tasks\Update-VersionFile\version.txt" />
     <Content Include="tasks\Upload-TfsTask\icon.png" />
-    <Content Include="tasks\Update-VersionFiles\icon.png" />
+    <Content Include="tasks\Update-VersionFile\icon.png" />
     <Content Include="tasks\Upload-TfsTask\version.txt" />
     <Content Include="TestingMaterials\TokenTarget.txt" />
     <None Include="readme.md" />
@@ -59,8 +59,8 @@
     <Content Include="tasks\Resolve-Token\Resolve-Token.ps1" />
     <Content Include="tasks\New-AzureEnvironment\task.json" />
     <Content Include="tasks\New-AzureEnvironment\New-AzureEnvironment.ps1" />
-    <Content Include="tasks\Update-VersionFiles\Update-VersionFiles.ps1" />
-    <Content Include="tasks\Update-VersionFiles\task.json" />
+    <Content Include="tasks\Update-VersionFile\Update-VersionFile.ps1" />
+    <Content Include="tasks\Update-VersionFile\task.json" />
     <Content Include="tasks\Upload-TfsTask\Upload-TfsTask.ps1" />
     <Content Include="tasks\Upload-TfsTask\task.json" />
     <Content Include="Utils\Update-TaskVersion.ps1" />

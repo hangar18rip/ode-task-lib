@@ -3,7 +3,7 @@
   "name": "ResolveTokens",
   "friendlyName": "Resolve Tokens",
   "description": "Resolves tokens in text file",
-  "helpMarkDown": "v0.0.125 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Resolve-Token.md)",
+  "helpMarkDown": "v0.0.144 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Resolve-Token.md)",
   "category": "Deploy",
   "visibility": [
     "Build",
@@ -13,7 +13,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 125
+"Patch": 144
   },
   "minimumAgentVersion": "1.95.0",
   "groups": [
@@ -23,13 +23,21 @@
       "isExpanded": false
     }
   ],
-  "instanceNameFormat": "Resolve tokens in $(filePath)",
+  "instanceNameFormat": "Resolve tokens in $(sourceFolder)",
   "inputs": [
     {
-      "name": "filePath",
+      "name": "sourceFolder",
       "type": "filePath",
-      "label": "Target file",
+      "label": "Source Folder",
       "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "The base directory where the search starts from. Starts in $(build.sourcesdirectory) by default"
+    },
+    {
+      "name": "filePath",
+      "type": "multiLine",
+      "defaultValue": "**",
+      "label": "Target file",
       "helpMarkDown": "Path to the file containing tokens.",
       "required": true
     },

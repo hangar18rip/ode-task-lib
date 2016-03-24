@@ -3,7 +3,7 @@
   "name": "UpdateVersionFiles",
   "friendlyName": "Update version files",
   "description": "Update version files",
-  "helpMarkDown": "v0.0.121 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Verison-AssemblyInfo.md)",
+  "helpMarkDown": "v0.0.137 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Verison-AssemblyInfo.md)",
   "category": "Build",
   "visibility": [
     "Build",
@@ -13,7 +13,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 121
+"Patch": 137
   },
   "demands": [
     "node.js"
@@ -26,15 +26,15 @@
       "isExpanded": false
     }
   ],
-  "instanceNameFormat": "Verison-AssemblyInfo",
+  "instanceNameFormat": "Update version files",
   "inputs": [
     {
       "name": "sourcePath",
-      "type": "string",
-      "label": "Directory where to search assembly info files",
+      "type": "filePath",
       "defaultValue": "",
-      "helpMarkDown": "Path to the file containing tokens.",
-      "required": true
+      "required": false,
+      "label": "Directory where to search assembly info files",
+      "helpMarkDown": "Path to the file containing tokens."
     },
     {
       "name": "filePattern",
@@ -70,7 +70,7 @@
   ],
   "execution": {
     "PowerShell": {
-      "target": "$(currentDirectory)\\Update-VersionFiles.ps1",
+      "target": "$(currentDirectory)\\Update-VersionFile.ps1",
       "argumentFormat": "",
       "workingDirectory": "$(currentDirectory)"
     }

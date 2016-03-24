@@ -1,13 +1,13 @@
 [CmdletBinding(DefaultParameterSetName = 'None')]
 param(
-	[string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $sourcePath,
+	[string] $sourcePath = $env:BUILD_SOURCESDIRECTORY,
     [string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $filePattern,
     [string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $buildRegex,
     [string]$replaceRegex,
     [string]$buildNumber = $env:BUILD_BUILDNUMBER
 )
 
-function DoJob
+function Update-VersionFile
 {
 	[CmdletBinding(DefaultParameterSetName = 'None')]
 	param(
@@ -18,13 +18,19 @@ function DoJob
 		[string]$buildNumber = $env:BUILD_BUILDNUMBER
 	)
 
-	if ($replaceRegex -eq "")
+	if ($replaceRegex -eq '')
 	{
+		Write-Host "Using $replaceRegex as the replacement regex"
 		$replaceRegex = $buildRegex
 	}
-	Write-Host "Using $replaceRegex as the replacement regex"
 
-	if ($buildNumber -match $buildRegex -ne $true) 
+	[System.Text.RegularExpressions.RegexOptions] $regOpts = [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::IgnorePatternWhitespace
+	#$tokens = [regex]::Matches($buildNumber, $buildRegex, $regOpts)
+	#[Match] $match =  [regex]::Match($buildNumber, $buildRegex, $regOpts)
+	
+	
+	if ($buildNumber -imatch $buildRegex -ne $true) 
+	#if ([regex]::Match($buildNumber, $buildRegex, $regOpts) -ne $true) 
 	{
 		Write-Host "Could not extract a version from [$buildNumber] using pattern [$buildRegex]"
 		return
@@ -32,20 +38,20 @@ function DoJob
 
 	try
 	{
+
 		$extractedBuildNumber = $Matches[0]
-		Write-Host "Using version $extractedBuildNumber in folder $sourcePath"
+		Write-Host "Using version $extractedBuildNumber"
   
 		$files = Get-ChildItem -Path $sourcePath -Filter $filePattern -Recurse
  
 		if(!$files)
 		{
 			Write-Host "##vso[task.logissue type=warning;]no file to upgrade"
-
 			return
 		}
 
 		[int]$fileIndex = 0
-		
+		[int]$fileCount = $files.Count
 		$files | % {
 			$fileIndex++
 			$fileToChange = $_.FullName  
@@ -54,7 +60,7 @@ function DoJob
 			Set-ItemProperty $fileToChange IsReadOnly $false
   
 			(Get-Content $fileToChange) | % { $_ -replace $replaceRegex, $extractedBuildNumber } | Set-Content $fileToChange
-			$done = $fileIndex / $files.Length * 100
+			$done = $fileIndex / $fileCount * 100
 			Write-Host "##vso[task.setprogress value=$done;]File replacement done on $($_.Name)"
 		}
 
@@ -66,4 +72,4 @@ function DoJob
 	}
 }
 
-DoJob -sourcePath $sourcePath -filePattern $filePattern -buildRegex $buildRegex -replaceRegex $replaceRegex -buildNumber $buildNumber
+Update-VersionFile -sourcePath $sourcePath -filePattern $filePattern -buildRegex $buildRegex -replaceRegex $replaceRegex -buildNumber $buildNumber

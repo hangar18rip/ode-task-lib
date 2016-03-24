@@ -77,17 +77,17 @@
       }
     },
     {
-      "id": "update-versionfiles",
+      "id": "updateversionfile-task",
       "type": "ms.vss-distributed-task.task",
       "targets": [
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "tasks/Update-VersionFiles"
+        "name": "tasks/Update-VersionFile"
       }
     },
     {
-      "id": "upload-tfstask",
+      "id": "uploadtfstask-task",
       "type": "ms.vss-distributed-task.task",
       "targets": [
         "ms.vss-distributed-task.tasks"
