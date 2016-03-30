@@ -67,16 +67,6 @@
       }
     },
     {
-      "id": "new-azureenvironment-task",
-      "type": "ms.vss-distributed-task.task",
-      "targets": [
-        "ms.vss-distributed-task.tasks"
-      ],
-      "properties": {
-        "name": "tasks/New-AzureEnvironment"
-      }
-    },
-    {
       "id": "updateversionfile-task",
       "type": "ms.vss-distributed-task.task",
       "targets": [
@@ -87,15 +77,14 @@
       }
     },
     {
-      "id": "uploadtfstask-task",
+      "id": "invokesql-task",
       "type": "ms.vss-distributed-task.task",
       "targets": [
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "tasks/Upload-TfsTask"
+        "name": "tasks/Invoke-Sql"
       }
     }
-
   ]
 }

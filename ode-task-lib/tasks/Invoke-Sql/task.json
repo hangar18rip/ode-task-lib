@@ -1,0 +1,137 @@
+{
+  "id": "5EE044DA-1E5E-4F37-9557-703390E045D9",
+  "name": "InvokeSqlTask",
+  "friendlyName": "Invoke SQL command",
+  "description": "Invokes a given SQL command",
+  "helpMarkDown": "v0.0.16 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-SQL.md)",
+  "category": "Deploy",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "author": "Hangar 18",
+  "version": {
+"Major": 0,
+"Minor": 0,
+"Patch": 16
+  },
+  "demands": [
+    "node.js"
+  ],
+  "minimumAgentVersion": "1.95.0",
+  "instanceNameFormat": "Invoke SQL",
+  "groups": [
+    {
+      "name": "target",
+      "displayName": "Target",
+      "isExpanded": true
+    }
+  ],
+  "inputs": [
+    {
+      "name": "CommandSource",
+      "type": "pickList",
+      "label": "Command source",
+      "defaultValue": "filePath",
+      "helpMarkDown": "",
+      "required": false,
+      "options": {
+        "inlineScript": "Inline Script",
+        "filePath": "File Path"
+      }
+    },
+    {
+      "name": "ScriptFile",
+      "type": "filePath",
+      "label": "Script File",
+      "defaultValue": "",
+      "helpMarkDown": "Script file to execute",
+      "required": true,
+      "visibleRule": "CommandSource = filePath"
+    },
+    {
+      "name": "Script",
+      "type": "multiLine",
+      "label": "Script",
+      "defaultValue": "",
+      "helpMarkDown": "Script to be executed",
+      "required": true,
+      "visibleRule": "CommandSource = inlineScript",
+      "properties": {
+        "resizable": "true",
+        "rows": "10",
+        "maxLength": "500"
+      }
+    },
+    {
+      "name": "TargetMethod",
+      "type": "pickList",
+      "label": "Specify SQL Using",
+      "required": true,
+      "groupName": "target",
+      "defaultValue": "server",
+      "options": {
+        "server": "Server",
+        "connectionString": "Connection String"
+      },
+      "helpMarkDown": "Select the option to connect to the target SQL Server Database. The options are to provide SQL Server Database details, or a SQL Server connection string, or a Publish profile XML file."
+    },
+    {
+      "name": "SqlInstance",
+      "type": "string",
+      "label": "Instance name",
+      "required": true,
+      "groupName": "target",
+      "defaultValue": "",
+      "visibleRule": "TargetMethod = server",
+      "helpMarkDown": "Provide the name of the SQL Server instance."
+    },
+    {
+      "name": "DatabaseName",
+      "type": "string",
+      "label": "Database Name",
+      "required": true,
+      "groupName": "target",
+      "defaultValue": "",
+      "visibleRule": "TargetMethod = server",
+      "helpMarkDown": "Provide the name of the SQL Server database."
+    },
+    {
+      "name": "SqlUsername",
+      "type": "string",
+      "label": "SQL Username",
+      "required": false,
+      "groupName": "target",
+      "defaultValue": "",
+      "visibleRule": "TargetMethod = server",
+      "helpMarkDown": "If the SQL Server login is specified, it will be used to connect to the SQL Server. The default is Integrated Authentication and uses the machine administrator's credentials."
+    },
+    {
+      "name": "SqlPassword",
+      "type": "string",
+      "label": "SQL Password",
+      "required": false,
+      "groupName": "target",
+      "defaultValue": "",
+      "visibleRule": "TargetMethod = server",
+      "helpMarkDown": "If SQL Server login user name is specified, then provide the SQL Server password. The default is Integrated Authentication and uses the machine administrator's credentials."
+    },
+    {
+      "name": "ConnectionString",
+      "type": "multiLine",
+      "label": "Connection String",
+      "required": true,
+      "groupName": "target",
+      "defaultValue": "",
+      "visibleRule": "TargetMethod = connectionString",
+      "helpMarkDown": "Specify the SQL Server connection string like \"Server=localhost;Database=Fabrikam;User ID=sqluser;Password=password;\"."
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\Invoke-Sql.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

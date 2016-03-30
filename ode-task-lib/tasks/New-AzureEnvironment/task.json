@@ -3,17 +3,18 @@
   "name": "NewAzureEnvironment",
   "friendlyName": "Create an Azure environment",
   "description": "Creates an Azure environment using ARM",
-  "helpMarkDown": "v0.0.118 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/New-AzureEnvironment.md)",
+  "helpMarkDown": "v0.0.119 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/New-AzureEnvironment.md)",
   "category": "Deploy",
   "visibility": [
     "Build",
-    "Release"
+    "Release",
+    "Experimental"
   ],
   "author": "Hangar 18",
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 118
+"Patch": 119
   },
   "demands": [
     "node.js"
