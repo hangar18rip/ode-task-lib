@@ -8,8 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9098D7E8-9158-4095-9CB6-73710356DDC9}"
 	ProjectSection(SolutionItems) = preProject
 		Invoke-Sql.md = Invoke-Sql.md
+		README.md = README.md
 		Resolve-Token.md = Resolve-Token.md
-		Verison-AssemblyInfo.md = Verison-AssemblyInfo.md
+		Update-VersionFIle.md = Update-VersionFIle.md
 	EndProjectSection
 EndProject
 Global

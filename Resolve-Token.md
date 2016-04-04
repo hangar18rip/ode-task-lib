@@ -1,3 +1,2 @@
-#Replace-Tokens
-
-Icon (c) http://www.softicons.com/system-icons/human-o2-icons-by-oliver-scholtz/actions-new-edit-find-replace-icon
+#Resolve-Tokens
+This task allows to replace parameters in one or many tokenized files
