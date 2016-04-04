@@ -12,7 +12,7 @@
     <AssemblyName>ode-task-lib</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,14 +46,10 @@
     <Content Include="tasks\Invoke-Sql\icon.png" />
     <Content Include="tasks\Invoke-Sql\icon.svg" />
     <Content Include="tasks\Invoke-Sql\version.txt" />
-    <Content Include="tasks\New-AzureEnvironment\icon.png" />
-    <Content Include="tasks\New-AzureEnvironment\version.txt" />
     <Content Include="tasks\Resolve-Token\icon.png" />
     <Content Include="tasks\Resolve-Token\version.txt" />
     <Content Include="tasks\Update-VersionFile\version.txt" />
-    <Content Include="tasks\Upload-TfsTask\icon.png" />
     <Content Include="tasks\Update-VersionFile\icon.png" />
-    <Content Include="tasks\Upload-TfsTask\version.txt" />
     <Content Include="TestingMaterials\TokenTarget.txt" />
     <None Include="readme.md" />
     <None Include="package.json" />
@@ -60,12 +57,8 @@
   <ItemGroup>
     <Content Include="tasks\Resolve-Token\task.json" />
     <Content Include="tasks\Resolve-Token\Resolve-Token.ps1" />
-    <Content Include="tasks\New-AzureEnvironment\task.json" />
-    <Content Include="tasks\New-AzureEnvironment\New-AzureEnvironment.ps1" />
     <Content Include="tasks\Update-VersionFile\Update-VersionFile.ps1" />
     <Content Include="tasks\Update-VersionFile\task.json" />
-    <Content Include="tasks\Upload-TfsTask\Upload-TfsTask.ps1" />
-    <Content Include="tasks\Upload-TfsTask\task.json" />
     <Content Include="Utils\Update-TaskVersion.ps1" />
     <Content Include="Utils\Update-AllTaskVersion.ps1" />
     <Content Include="tasks\Invoke-Sql\Invoke-Sql.ps1" />
