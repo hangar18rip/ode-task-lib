@@ -3,7 +3,7 @@
   "name": "UpdateVersionFiles",
   "friendlyName": "Update version files",
   "description": "Update version files",
-  "helpMarkDown": "v0.0.137 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Verison-AssemblyInfo.md)",
+  "helpMarkDown": "v0.0.139 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Update-VersionFile.md)",
   "category": "Build",
   "visibility": [
     "Build",
@@ -13,7 +13,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 137
+"Patch": 139
   },
   "demands": [
     "node.js"
