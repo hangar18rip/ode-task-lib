@@ -30,7 +30,12 @@ function Resolve-Token {
     [bool]$paramNotFound = $false
     [int] $lineIndex = 0
 
-	$files = ($filePath | % {Get-ChildItem -Path $sourceFolder -Filter $_ }).FullName
+	$files = ($filePath | % {Get-ChildItem -Path $sourceFolder -Filter $_ -Recurse }).FullName
+
+	if (($files -eq $null) -or ($files.Length -eq 0))
+	{
+		return
+	}
 
 	$files | % {Set-ItemProperty -Path $_ -Name IsReadOnly -Value $false}
 
