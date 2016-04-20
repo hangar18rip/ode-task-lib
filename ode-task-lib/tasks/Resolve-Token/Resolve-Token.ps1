@@ -14,6 +14,33 @@ Write-Host "tokenRegex ==> $tokenRegex"
 Write-Host "warningAsError ==> $warningAsError"
 Write-Host "fileEncoding ==> $fileEncoding"
 
+Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
+Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
+
+#(Get-ChildItem Env:) | % { Write-Host "$($_.Name) = $($_.Value)" }
+#Write-Host "$env:Build_BuildNumber"
+#(Get-Item "env:\build_buildnumber").Value | Write-Host
+
+function Get-KeyValue{
+	param (
+		[string] $key
+	)
+	$envValue = Get-TaskVariable $distributedTaskContext $key -Global $false -ErrorAction Ignore
+	if($envValue -ne $null)
+	{
+		return $envValue
+	}
+
+	$envValue = Get-TaskVariable $distributedTaskContext $key -Global $true -ErrorAction Ignore
+	if($envValue -ne $null)
+	{
+		return $envValue
+	}
+
+	$envVars = Get-Item -Path "env:\$key" -ErrorAction Ignore
+	return ($envVars.Value)
+}
+
 function Resolve-Token {
     param (
 		[string] $sourceFolder,
@@ -25,14 +52,36 @@ function Resolve-Token {
     )
 
     [System.Text.RegularExpressions.RegexOptions] $regOpts = [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::IgnorePatternWhitespace
-    $envVars = Get-ChildItem -Path env:
+    #$envVars = Get-ChildItem -Path env:
 
     [bool]$paramNotFound = $false
     [int] $lineIndex = 0
 
-	$files = ($filePath | % {Get-ChildItem -Path $sourceFolder -Filter $_ -Recurse }).FullName
+	$foundFiles = @()
 
-	if (($files -eq $null) -or ($files.Length -eq 0))
+	$files | % {
+		$file = $_
+		if ($file.Contains("*") -or $file.Contains("?"))
+		{
+			$tmpFiles = (Find-Files -SearchPattern $file -RootFolder $sourceFolder -IncludeFolders $false)
+			$tmpFiles | % { $foundFiles+=$_ }
+		}
+		else
+		{
+			if([System.IO.Path]::IsPathRooted($file) -eq $true)
+			{
+				$foundFiles += $file
+			}
+			else
+			{
+				$foundFiles += (Join-Path $sourceFolder $file)
+			}
+		}
+	}
+
+	$files = $foundFiles
+
+	if (($files -eq $null) -or ($files.Count -eq 0))
 	{
 		return
 	}
@@ -51,11 +100,13 @@ function Resolve-Token {
 			foreach($token in $tokens){
 				$key = $token.Groups[2].Value
 
-				$envValue = $envVars | ? { $_.Name -ieq $key}
+				#$envValue = Get-TaskVariable $distributedTaskContext $key -Global $false
+				$envValue = Get-KeyValue -key $key
+				Write-Verbose "$key = $envValue"
 				if($envValue -ne $null)
 				{
 					Write-Host "Replacing key $key"
-					$line = $line.Replace($token.Groups[1].Value, $envValue.Value)
+					$line = $line.Replace($token.Groups[1].Value, $envValue)
 				} else {
 					$paramNotFound = $true
 					if(!$treatWarningsAsError)
@@ -72,8 +123,8 @@ function Resolve-Token {
 	}
 	if($paramNotFound -and $treatWarningsAsError)
 	{
-		Write-Host "##vso[task.logissue type=error;sourcepath=$filePath;]Missing parameters in this file"
-		throw "Missing parameter in $filePath"
+		Write-Host "##vso[task.logissue type=error;]Missing at least one parameter in a file. Check logs for more information"
+		throw "Missing at least one parameter in a file. Check logs for more information"
 	}
 }
 
