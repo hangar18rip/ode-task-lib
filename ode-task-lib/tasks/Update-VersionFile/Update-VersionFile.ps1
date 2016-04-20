@@ -1,19 +1,23 @@
 [CmdletBinding(DefaultParameterSetName = 'None')]
 param(
-	[string] $sourcePath = $env:BUILD_SOURCESDIRECTORY,
-    [string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $filePattern,
+	[string] $sourceFolder = $env:BUILD_SOURCESDIRECTORY,
+	[Parameter(Mandatory = $true)]
+	[string] $filePath,
     [string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $buildRegex,
     [string]$replaceRegex,
     [string]$buildNumber = $env:BUILD_BUILDNUMBER
 )
 
+Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
+Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
+
 function Update-VersionFile
 {
 	[CmdletBinding(DefaultParameterSetName = 'None')]
 	param(
-		[string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $sourcePath,
-		[string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $filePattern,
-		[string][Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] $buildRegex,
+		[string][Parameter(Mandatory=$true)] $sourceFolder,
+		[string[]][Parameter(Mandatory=$true)] $files,
+		[string][Parameter(Mandatory=$true)] $buildRegex,
 		[string]$replaceRegex,
 		[string]$buildNumber = $env:BUILD_BUILDNUMBER
 	)
@@ -42,9 +46,31 @@ function Update-VersionFile
 		$extractedBuildNumber = $Matches[0]
 		Write-Host "Using version $extractedBuildNumber"
 
-		$files = Get-ChildItem -Path $sourcePath -Filter $filePattern -Recurse
+		$foundFiles = @()
 
-		if(!$files)
+		$files | % {
+			$file = $_
+			if ($file.Contains("*") -or $file.Contains("?"))
+			{
+				$tmpFiles = (Find-Files -SearchPattern $file -RootFolder $sourceFolder -IncludeFolders $false)
+				$tmpFiles | % { $foundFiles+=$_ }
+			}
+			else
+			{
+				if([System.IO.Path]::IsPathRooted($file) -eq $true)
+				{
+					$foundFiles += $file
+				}
+				else
+				{
+					$foundFiles += (Join-Path $sourceFolder $file)
+				}
+			}
+		}
+
+		$files = $foundFiles
+
+		if (($files -eq $null) -or ($files.Count -eq 0))
 		{
 			Write-Host "##vso[task.logissue type=warning;]no file to upgrade"
 			return
@@ -53,11 +79,11 @@ function Update-VersionFile
 		[int]$fileIndex = 0
 		[int]$fileCount = $files.Count
 		$files | % {
-			$fileIndex++
-			$fileToChange = $_.FullName
-			Write-Host "Updating version in $($fileToChange)"
+			Set-ItemProperty -Path $_ -Name IsReadOnly -Value $false
 
-			Set-ItemProperty $fileToChange IsReadOnly $false
+			$fileIndex++
+			$fileToChange = $_
+			Write-Host "Updating version in $($fileToChange)"
 
 			(Get-Content $fileToChange) | % { $_ -replace $replaceRegex, $extractedBuildNumber } | Set-Content $fileToChange
 			$done = $fileIndex / $fileCount * 100
@@ -72,5 +98,6 @@ function Update-VersionFile
 	}
 }
 
-Update-VersionFile -sourcePath $sourcePath -filePattern $filePattern -buildRegex $buildRegex -replaceRegex $replaceRegex -buildNumber $buildNumber
+[string[]] $files = ($filePath -split '[\r\n]')
+Update-VersionFile -sourceFolder $sourceFolder -files $files -buildRegex $buildRegex -replaceRegex $replaceRegex -buildNumber $buildNumber
 

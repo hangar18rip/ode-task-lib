@@ -78,6 +78,7 @@ function Resolve-Token {
 
 	if (($files -eq $null) -or ($files.Count -eq 0))
 	{
+		Write-Host "##vso[task.logissue type=warning;]no file to upgrade"
 		return
 	}
 

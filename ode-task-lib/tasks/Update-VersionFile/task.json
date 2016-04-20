@@ -3,7 +3,7 @@
   "name": "UpdateVersionFiles",
   "friendlyName": "Update version files",
   "description": "Update version files",
-  "helpMarkDown": "v0.0.139 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Update-VersionFile.md)",
+  "helpMarkDown": "v0.0.144 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Update-VersionFile.md)",
   "category": "Build",
   "visibility": [
     "Build",
@@ -13,7 +13,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 139
+"Patch": 144
   },
   "demands": [
     "node.js"
@@ -29,18 +29,18 @@
   "instanceNameFormat": "Update version files",
   "inputs": [
     {
-      "name": "sourcePath",
+      "name": "sourceFolder",
       "type": "filePath",
+      "label": "Source Folder",
       "defaultValue": "",
       "required": false,
-      "label": "Directory where to search assembly info files",
-      "helpMarkDown": "Path to the file containing tokens."
+      "helpMarkDown": "The base directory where the search starts from. Starts in $(build.sourcesdirectory) by default"
     },
     {
-      "name": "filePattern",
-      "type": "string",
-      "label": "Files to look for",
-      "defaultValue": "*assemblyinfo.*",
+      "name": "filePath",
+      "type": "multiLine",
+      "label": "Target file",
+      "helpMarkDown": "Path to the file containing tokens.",
       "required": true
     },
     {
