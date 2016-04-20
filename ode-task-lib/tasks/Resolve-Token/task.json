@@ -3,7 +3,7 @@
   "name": "ResolveTokens",
   "friendlyName": "Resolve Tokens",
   "description": "Resolves tokens in text file",
-  "helpMarkDown": "v0.0.183 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Resolve-Token.md)",
+  "helpMarkDown": "v0.0.185 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Resolve-Token.md)",
   "category": "Deploy",
   "visibility": [
     "Build",
@@ -13,7 +13,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 183
+"Patch": 185
   },
   "minimumAgentVersion": "1.95.0",
   "groups": [

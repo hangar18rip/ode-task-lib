@@ -17,13 +17,9 @@ Write-Host "fileEncoding ==> $fileEncoding"
 Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
 Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
 
-#(Get-ChildItem Env:) | % { Write-Host "$($_.Name) = $($_.Value)" }
-#Write-Host "$env:Build_BuildNumber"
-#(Get-Item "env:\build_buildnumber").Value | Write-Host
-
 function Get-KeyValue{
 	param (
-		[string] $key
+		[string] $Key
 	)
 	$envValue = Get-TaskVariable $distributedTaskContext $key -Global $false -ErrorAction Ignore
 	if($envValue -ne $null)
@@ -52,7 +48,6 @@ function Resolve-Token {
     )
 
     [System.Text.RegularExpressions.RegexOptions] $regOpts = [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::IgnorePatternWhitespace
-    #$envVars = Get-ChildItem -Path env:
 
     [bool]$paramNotFound = $false
     [int] $lineIndex = 0
@@ -86,11 +81,11 @@ function Resolve-Token {
 		return
 	}
 
-	$files | % {Set-ItemProperty -Path $_ -Name IsReadOnly -Value $false}
-
 	$files | % {
 		$setParametersFile = $_
+		Set-ItemProperty -Path $_ -Name IsReadOnly -Value $false
 		Write-Host "Processing file $_"
+
 		( Get-Content -Path $_ -Encoding $fileEncoding) | % {
 			$line = $_
 			$lineIndex = $lineIndex + 1
@@ -100,8 +95,7 @@ function Resolve-Token {
 			foreach($token in $tokens){
 				$key = $token.Groups[2].Value
 
-				#$envValue = Get-TaskVariable $distributedTaskContext $key -Global $false
-				$envValue = Get-KeyValue -key $key
+				$envValue = Get-KeyValue -Key $key
 				Write-Verbose "$key = $envValue"
 				if($envValue -ne $null)
 				{
@@ -121,12 +115,42 @@ function Resolve-Token {
 			$line
 		} | Set-Content -Path $_ -Encoding $fileEncoding
 	}
+
 	if($paramNotFound -and $treatWarningsAsError)
 	{
 		Write-Host "##vso[task.logissue type=error;]Missing at least one parameter in a file. Check logs for more information"
 		throw "Missing at least one parameter in a file. Check logs for more information"
 	}
 }
+
+#function Get-FileEncoding
+#{
+#	param
+#	(
+#		[string] $file
+#	)
+
+#	$bom = Get-Content -Path $file -Encoding Byte -ReadCount 4 -TotalCount 4
+#	$intBom = [System.BitConverter]::ToUInt32($bom)
+
+#	#https://en.wikipedia.org/wiki/Byte_order_mark
+#	$bomValues = @{
+#		0xEFBBBF = 'UTF8';
+#		0xFEFF = 'UTF-16 Big-Endian';
+#		0xFFFE = 'UTF-16 Little-Endian';
+#		0x0000FEFF = 'UTF32 Big-Endian';
+#		0xFFFE0000 = 'UTF32 Little-Endian';
+#		0x2B2F7638 = 'UTF7';
+#		0x2B2F7639 = 'UTF7';
+#		0x2B2F762B = 'UTF7';
+#		0x2B2F762F = 'UTF7';
+#		0xF7644C = 'UTF-1';
+#		0xDD736673 = 'UTF-EBCDIC';
+#		0x0EFEFF = 'SCSU';
+#		0xFBEE28 = 'BOCU-1';
+#		0x84319533 = 'GB-18030';
+#	}
+#}
 
 try
 {
