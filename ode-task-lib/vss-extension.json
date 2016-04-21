@@ -4,7 +4,6 @@
   "version": "__Build_BuildNumber__",
   "name": "Build & Release Activities",
   "scopes": [ "vso.work", "vso.work_write" ],
-  "description": "This is the extension file from the contributions guide example on GitHub.  Feel free to add or remove sections as you see fit.",
   "baseUri": "https://github.com/hangar18rip/ode-task-lib",
   "publisher": "hangar18",
   "public": false,
@@ -74,16 +73,6 @@
       ],
       "properties": {
         "name": "tasks/Update-VersionFile"
-      }
-    },
-    {
-      "id": "invokesql-task",
-      "type": "ms.vss-distributed-task.task",
-      "targets": [
-        "ms.vss-distributed-task.tasks"
-      ],
-      "properties": {
-        "name": "tasks/Invoke-Sql"
       }
     }
   ]
