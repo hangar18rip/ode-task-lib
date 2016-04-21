@@ -4,7 +4,7 @@
   "version": "__Build_BuildNumber__",
   "name": "Build & Release Activities",
   "scopes": [ "vso.work", "vso.work_write" ],
-  "description": "",
+  "description": "Tasks to ease Builds and Releases",
   "baseUri": "https://github.com/hangar18rip/ode-task-lib",
   "publisher": "hangar18",
   "public": false,
