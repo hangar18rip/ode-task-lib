@@ -37,6 +37,39 @@ function Get-KeyValue{
 	return ($envVars.Value)
 }
 
+# Method based on code found here http://poshcode.org/2059
+# if needed, add additional encodings
+function Get-FileEncoding
+{
+	param (
+		[string]$Path,
+		[Microsoft.PowerShell.Commands.FileSystemCmdletProviderEncoding]$FallbackEncoding
+    )
+
+    [byte[]]$byte = Get-Content -Encoding byte -ReadCount 4 -TotalCount 4 -Path $Path
+
+    if ( $byte[0] -eq 0xef -and $byte[1] -eq 0xbb -and $byte[2] -eq 0xbf )
+    {
+		return [Microsoft.PowerShell.Commands.FileSystemCmdletProviderEncoding]::UTF8
+	}
+    elseif ($byte[0] -eq 0xfe -and $byte[1] -eq 0xff)
+    {
+		return [Microsoft.PowerShell.Commands.FileSystemCmdletProviderEncoding]::Unicode
+	}
+    elseif ($byte[0] -eq 0 -and $byte[1] -eq 0 -and $byte[2] -eq 0xfe -and $byte[3] -eq 0xff)
+    {
+		return [Microsoft.PowerShell.Commands.FileSystemCmdletProviderEncoding]::UTF32
+	}
+    elseif ($byte[0] -eq 0x2b -and $byte[1] -eq 0x2f -and $byte[2] -eq 0x76)
+    {
+		return [Microsoft.PowerShell.Commands.FileSystemCmdletProviderEncoding]::UTF7
+	}
+    else
+    {
+		return $FallbackEncoding
+	}
+}
+
 function Resolve-Token {
     param (
 		[string] $sourceFolder,
@@ -86,9 +119,11 @@ function Resolve-Token {
 		$setParametersFile = $_
 		Set-ItemProperty -Path $_ -Name IsReadOnly -Value $false
 		Write-Host "Processing file $_"
-
-		( Get-Content -Path $_ -Encoding $fileEncoding) | % {
+		$fileEncoding = Get-FileEncoding -Path $_ -FallbackEncoding $fileEncoding
+		Write-Host "Detected file encoding : $fileEncoding"
+		(Get-Content -Path $_ -Encoding $fileEncoding) | % {
 			$line = $_
+
 			$lineIndex = $lineIndex + 1
 			$tokens = [regex]::Matches($line, $tokenRegex, $regOpts)
 
@@ -123,35 +158,6 @@ function Resolve-Token {
 		throw "Missing at least one parameter in a file. Check logs for more information"
 	}
 }
-
-#function Get-FileEncoding
-#{
-#	param
-#	(
-#		[string] $file
-#	)
-
-#	$bom = Get-Content -Path $file -Encoding Byte -ReadCount 4 -TotalCount 4
-#	$intBom = [System.BitConverter]::ToUInt32($bom)
-
-#	#https://en.wikipedia.org/wiki/Byte_order_mark
-#	$bomValues = @{
-#		0xEFBBBF = 'UTF8';
-#		0xFEFF = 'UTF-16 Big-Endian';
-#		0xFFFE = 'UTF-16 Little-Endian';
-#		0x0000FEFF = 'UTF32 Big-Endian';
-#		0xFFFE0000 = 'UTF32 Little-Endian';
-#		0x2B2F7638 = 'UTF7';
-#		0x2B2F7639 = 'UTF7';
-#		0x2B2F762B = 'UTF7';
-#		0x2B2F762F = 'UTF7';
-#		0xF7644C = 'UTF-1';
-#		0xDD736673 = 'UTF-EBCDIC';
-#		0x0EFEFF = 'SCSU';
-#		0xFBEE28 = 'BOCU-1';
-#		0x84319533 = 'GB-18030';
-#	}
-#}
 
 try
 {

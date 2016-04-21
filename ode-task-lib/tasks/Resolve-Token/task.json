@@ -3,7 +3,7 @@
   "name": "ResolveTokens",
   "friendlyName": "Resolve Tokens",
   "description": "Resolves tokens in text file",
-  "helpMarkDown": "v0.0.186 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Resolve-Token.md)",
+  "helpMarkDown": "v0.0.202 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Resolve-Token.md)",
   "category": "Deploy",
   "visibility": [
     "Build",
@@ -13,7 +13,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 186
+"Patch": 202
   },
   "minimumAgentVersion": "1.95.0",
   "groups": [
@@ -58,11 +58,11 @@
     {
       "name": "fileEncoding",
       "type": "pickList",
-      "label": "File encoding",
+      "label": "Default encoding",
       "required": false,
       "groupName": "advanced",
-      "defaultValue": "Default",
-      "helpMarkDown": "Encoding used to manipulate the file",
+      "defaultValue": "Unicode",
+      "helpMarkDown": "Encoding used to manipulate the file when no BOM can be found",
       "options": {
         "Default": "Default",
         "Unicode": "Unicode",
