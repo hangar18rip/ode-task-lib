@@ -6,4 +6,4 @@ This extension is a collection of tasks for Building and Releasing software with
 * [Update-VersionFile](Update-VersionFile.md)
 
 
-Extension build by VSTS ![Build Status](https://hangar18.visualstudio.com/DefaultCollection/_apis/public/build/definitions/a9c26074-d0ed-4110-8a8b-cd14b5beaaeb/17/badge)
+Extension built by VSTS ![Build Status](https://hangar18.visualstudio.com/DefaultCollection/_apis/public/build/definitions/a9c26074-d0ed-4110-8a8b-cd14b5beaaeb/17/badge)
