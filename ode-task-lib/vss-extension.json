@@ -41,8 +41,8 @@
     }
   },
   "branding": {
-    "color": "rgb(220, 235, 252)",
-    "theme": "light"
+    "color": "rgb(53, 53, 53)",
+    "theme": "dark"
   },
   "files": [
     {
