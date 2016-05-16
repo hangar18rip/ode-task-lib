@@ -39,8 +39,7 @@ function Get-KeyValue{
 
 # Method based on code found here http://poshcode.org/2059
 # if needed, add additional encodings
-function Get-FileEncoding
-{
+x{
 	param (
 		[string]$Path,
 		[Microsoft.PowerShell.Commands.FileSystemCmdletProviderEncoding]$FallbackEncoding
