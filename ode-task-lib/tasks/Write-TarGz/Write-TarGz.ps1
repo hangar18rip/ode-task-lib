@@ -4,8 +4,8 @@ param(
 	[string] $SourceFolder
 )
 
-Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
-Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
+#Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
+#Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
 
 function Write-TarGz {
     param (
