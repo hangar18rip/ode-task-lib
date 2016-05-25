@@ -50,6 +50,9 @@
     <Content Include="tasks\Resolve-Token\version.txt" />
     <Content Include="tasks\Update-VersionFile\version.txt" />
     <Content Include="tasks\Update-VersionFile\icon.png" />
+    <Content Include="tasks\Write-TarGz\7za.exe" />
+    <Content Include="tasks\Write-TarGz\icon.png" />
+    <Content Include="tasks\Write-TarGz\version.txt" />
     <Content Include="TestingMaterials\TokenTarget.txt" />
     <None Include="readme.md" />
     <None Include="package.json" />
@@ -63,6 +66,9 @@
     <Content Include="Utils\Update-AllTaskVersion.ps1" />
     <Content Include="tasks\Invoke-Sql\Invoke-Sql.ps1" />
     <Content Include="tasks\Invoke-Sql\task.json" />
+    <Content Include="tasks\Write-TarGz\task.json" />
+    <Content Include="tasks\Write-TarGz\Write-TarGz.ps1" />
+    <Content Include="Utils\Import-BuildAgentModules.ps1" />
     <None Include="vss-extension.json" />
     <None Include="settings.vset.json" />
   </ItemGroup>
@@ -109,4 +115,7 @@
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>powershell -ExecutionPolicy ByPass -File "$(ProjectDir)utils\Update-AllTaskVersion.ps1"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

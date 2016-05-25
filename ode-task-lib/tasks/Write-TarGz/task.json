@@ -1,0 +1,56 @@
+{
+  "id": "F25BD06C-2DAC-453F-8007-F3AC4388DC39",
+  "name": "WriteTarGz",
+  "friendlyName": "Create .tar.gz file",
+  "description": "Creates a .tar.gz file",
+  "helpMarkDown": "v0.0.45 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Write-TarGz.md)",
+  "category": "Package",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "author": "Hangar 18",
+  "version": {
+"Major": 0,
+"Minor": 0,
+"Patch": 45
+  },
+  "demands": [
+    "node.js"
+  ],
+  "minimumAgentVersion": "1.95.0",
+  "instanceNameFormat": "Create $(TargetFileName) file",
+  "inputs": [
+    {
+      "name": "TargetFileName",
+      "type": "string",
+      "label": "Target file name",
+      "defaultValue": "archive",
+      "helpMarkDown": "",
+      "required": true
+    },
+    {
+      "name": "SourceFolder",
+      "type": "filePath",
+      "label": "Source Folder",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "The base directory where the search starts from."
+    },
+    {
+      "name": "FilePath",
+      "type": "multiLine",
+      "label": "Target file",
+      "helpMarkDown": "Path to the file containing tokens.",
+      "required": true
+    }
+
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\Write-TarGz.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
