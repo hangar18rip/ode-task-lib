@@ -20,7 +20,7 @@ function Write-TarGz {
 	New-Alias -Name 7z -Value (Join-Path $PSScriptRoot "7za.exe")
 
 	$generatedFile = (Join-Path $SourceFolder "$TargetFileName.tar")
-	& 7z a -ttar "$generatedFile" "$(Join-Path $SourceFolder "*.*")" -r
+	& 7z a -ttar "$generatedFile" "$(Join-Path $SourceFolder "*")" -r
 	$generatedFile2 = "$generatedFile.gz"
     & 7z a -tgzip "$generatedFile2" "$generatedFile"
 	Remove-Item $generatedFile -Force

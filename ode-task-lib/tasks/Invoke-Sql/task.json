@@ -3,7 +3,7 @@
   "name": "InvokeSqlTask",
   "friendlyName": "Invoke SQL command",
   "description": "Invokes a given SQL command",
-  "helpMarkDown": "v0.0.19 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-Sql.md)",
+  "helpMarkDown": "v0.0.20 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-Sql.md)",
   "category": "Deploy",
   "visibility": [
     "Build",
@@ -14,7 +14,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 19
+"Patch": 20
   },
   "demands": [
     "node.js"
