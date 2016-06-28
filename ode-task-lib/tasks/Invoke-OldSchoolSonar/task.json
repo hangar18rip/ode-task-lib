@@ -1,0 +1,44 @@
+{
+  "id": "C65C4BA3-6C3C-4D18-ACA3-BBB052711921",
+  "name": "InvokeOldSchoolSonar",
+  "friendlyName": "Invoke Sonar (Old School Way)",
+  "description": "Invoke Sonar the Old School Way",
+  "helpMarkDown": "v0.0.12 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-OldSchoolSonar.md)",
+  "category": "Build",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "author": "Hangar 18",
+  "version": {
+"Major": 0,
+"Minor": 0,
+"Patch": 12
+  },
+  "minimumAgentVersion": "1.95.0",
+  "instanceNameFormat": "Invoke Sonar",
+  "inputs": [
+    {
+      "name": "ConnectedServiceName",
+      "type": "connectedService:Generic",
+      "label": "SonarQube Endpoint",
+      "required": true,
+      "helpMarkDown": "The SonarQube server generic endpoint"
+    },
+    {
+      "name": "ProjectDirectory",
+      "type": "filePath",
+      "label": "Base directory",
+      "defaultValue": "$(System.DefaultWorkingDirectory)",
+      "helpMarkDown": "",
+      "required": true
+    }
+  ],
+  "execution": {
+    "PowerShell": {
+      "target": "$(currentDirectory)\\Invoke-OldSchoolSonar.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

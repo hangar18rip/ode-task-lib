@@ -3,7 +3,7 @@
   "name": "WriteTarGz",
   "friendlyName": "Create .tar.gz file",
   "description": "Creates a .tar.gz file",
-  "helpMarkDown": "v0.0.51 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Write-TarGz.md)",
+  "helpMarkDown": "v0.0.53 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Write-TarGz.md)",
   "category": "Package",
   "visibility": [
     "Build",
@@ -13,11 +13,8 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 51
+"Patch": 53
   },
-  "demands": [
-    "node.js"
-  ],
   "minimumAgentVersion": "1.95.0",
   "instanceNameFormat": "Create $(TargetFileName) file",
   "inputs": [

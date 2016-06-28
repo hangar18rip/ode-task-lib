@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="img\logo.png" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\icon.png" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\lib\sonar-scanner-cli-2.6.1.jar" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\version.txt" />
     <Content Include="tasks\Invoke-Sql\icon.png" />
     <Content Include="tasks\Invoke-Sql\icon.svg" />
     <Content Include="tasks\Invoke-Sql\version.txt" />
@@ -69,6 +72,13 @@
     <Content Include="tasks\Write-TarGz\task.json" />
     <Content Include="tasks\Write-TarGz\Write-TarGz.ps1" />
     <Content Include="Utils\Import-BuildAgentModules.ps1" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\Invoke-OldSchoolSonar.ps1" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\task.json" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\bin\sonar-scanner" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\bin\sonar-scanner.bat" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\conf\sonar-scanner.properties" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\bin\sonar-runner" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\bin\sonar-runner.bat" />
     <None Include="vss-extension.json" />
     <None Include="settings.vset.json" />
   </ItemGroup>

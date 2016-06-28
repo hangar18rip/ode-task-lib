@@ -3,7 +3,7 @@
   "name": "UpdateVersionFiles",
   "friendlyName": "Update version files",
   "description": "Update version files",
-  "helpMarkDown": "v0.0.145 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Update-VersionFile.md)",
+  "helpMarkDown": "v0.0.147 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Update-VersionFile.md)",
   "category": "Build",
   "visibility": [
     "Build",
@@ -13,11 +13,8 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 145
+"Patch": 147
   },
-  "demands": [
-    "node.js"
-  ],
   "minimumAgentVersion": "1.0.0",
   "groups": [
     {
