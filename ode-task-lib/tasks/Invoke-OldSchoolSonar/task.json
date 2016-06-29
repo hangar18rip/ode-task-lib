@@ -3,7 +3,7 @@
   "name": "InvokeOldSchoolSonar",
   "friendlyName": "Invoke Sonar (Old School Way)",
   "description": "Invoke Sonar the Old School Way",
-  "helpMarkDown": "v0.0.88 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-OldSchoolSonar.md)",
+  "helpMarkDown": "v0.0.90 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-OldSchoolSonar.md)",
   "category": "Build",
   "visibility": [
     "Build",
@@ -13,7 +13,7 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 88
+"Patch": 90
   },
   "minimumAgentVersion": "1.95.0",
   "instanceNameFormat": "Invoke Sonar",

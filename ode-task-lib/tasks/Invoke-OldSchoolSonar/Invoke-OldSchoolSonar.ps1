@@ -76,15 +76,15 @@ function Invoke-OldSchoolSonar {
 	#	$command += "-X"
 	#	$command += "-e"
 	#}
-	#$commandExe = "& `"$scanner`" scan$command"
-	#Write-Verbose $commandExe
-	#Invoke-Expression "$commandExe"
-	#$res = Start-Process -FilePath $scanner -ArgumentList $command -Wait -PassThru -WorkingDirectory $ProjectDirectory -Verbose
 	$res = Start-ProcessExtended -FilePath $scanner -Arguments $command -WorkingDirectory $ProjectDirectory -Verbose
+	Pop-Location
 
 	Write-Verbose "Exit code : $($res.ExitCode)"
+	if($res.ExitCode -ne 0)
+	{
+		throw "Sonar analysis failed"
+	}
 
-	Pop-Location
 }
 
 Invoke-OldSchoolSonar -ConnectedServiceName $ConnectedServiceName -ProjectDirectory $ProjectDirectory -ProjectKey $ProjectKey -ProjectName $ProjectName -ProjectVersion $ProjectVersion -AdditionalParameters $AdditionalParameters
