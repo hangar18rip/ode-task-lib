@@ -3,7 +3,7 @@
   "name": "InvokeOldSchoolSonar",
   "friendlyName": "Invoke Sonar (Old School Way)",
   "description": "Invoke Sonar the Old School Way",
-  "helpMarkDown": "v0.0.12 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-OldSchoolSonar.md)",
+  "helpMarkDown": "v0.0.83 - [More Information](https://github.com/hangar18rip/ode-task-lib/blob/master/Invoke-OldSchoolSonar.md)",
   "category": "Build",
   "visibility": [
     "Build",
@@ -13,17 +13,31 @@
   "version": {
 "Major": 0,
 "Minor": 0,
-"Patch": 12
+"Patch": 83
   },
   "minimumAgentVersion": "1.95.0",
   "instanceNameFormat": "Invoke Sonar",
+  "demands": [ "java" ],
+  "groups": [
+    {
+      "name": "serverSettings",
+      "displayName": "SonarQube Server",
+      "isExpanded": true
+    },
+    {
+      "name": "project",
+      "displayName": "SonarQube Project Settings",
+      "isExpanded": true
+    }
+  ],
   "inputs": [
     {
       "name": "ConnectedServiceName",
       "type": "connectedService:Generic",
       "label": "SonarQube Endpoint",
       "required": true,
-      "helpMarkDown": "The SonarQube server generic endpoint"
+      "helpMarkDown": "The SonarQube server generic endpoint",
+      "groupName": "serverSettings"
     },
     {
       "name": "ProjectDirectory",
@@ -32,6 +46,40 @@
       "defaultValue": "$(System.DefaultWorkingDirectory)",
       "helpMarkDown": "",
       "required": true
+    },
+    {
+      "name": "projectKey",
+      "type": "string",
+      "label": "Project Key",
+      "required": true,
+      "helpMarkDown": "The SonarQube project unique key, i.e. sonar.projectKey",
+      "groupName": "project"
+    },
+    {
+      "name": "projectName",
+      "type": "string",
+      "label": "Project Name",
+      "required": true,
+      "helpMarkDown": "The SonarQube project name, i.e. sonar.ProjectName",
+      "groupName": "project"
+    },
+    {
+      "name": "projectVersion",
+      "type": "string",
+      "label": "Project Version",
+      "defaultValue": "1.0",
+      "required": true,
+      "helpMarkDown": "The SonarQube project version, i.e. sonar.projectVersion",
+      "groupName": "project"
+    },
+    {
+      "name": "additionalParameters",
+      "type": "multiLine",
+      "label": "Additional parameters",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Additional parameters for Sonar Analysis (ex : sonar.languages=$(languages). One per line.",
+      "groupName": "project"
     }
   ],
   "execution": {
