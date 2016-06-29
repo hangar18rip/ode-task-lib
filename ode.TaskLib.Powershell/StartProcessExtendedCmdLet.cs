@@ -38,10 +38,9 @@ namespace ode.TaskLib.Powershell
             p.Start();
             p.BeginErrorReadLine();
             p.BeginOutputReadLine();
-            p.WaitForExit((int)(new TimeSpan(1, 0, 0).TotalMilliseconds));
+            p.WaitForExit();
 
             WriteObject(p);
-
         }
 
         void OutputDataReceived(object sender, DataReceivedEventArgs e)

@@ -43,7 +43,8 @@ namespace ode.TaskLib.Powershell.UnitTests
         {
             command.Parameters.Clear();
             command.Parameters.Add(new CommandParameter("FilePath", "ping"));
-            command.Parameters.Add(new CommandParameter("Arguments", new string[] { "localhost" }));
+            command.Parameters.Add(new CommandParameter("Arguments", new[] { "localhost" }));
+            command.Parameters.Add(new CommandParameter("WorkingDirectory", @".\"));
 
             var res = pipe.Invoke();
             Assert.AreEqual(1, res.Count);
