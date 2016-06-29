@@ -44,6 +44,7 @@
   <ItemGroup>
     <Content Include="img\logo.png" />
     <Content Include="tasks\Invoke-OldSchoolSonar\icon.png" />
+    <Content Include="tasks\Invoke-OldSchoolSonar\ode.TaskLib.Powershell.dll" />
     <Content Include="tasks\Invoke-OldSchoolSonar\scanner\lib\sonar-scanner-cli-2.6.1.jar" />
     <Content Include="tasks\Invoke-OldSchoolSonar\version.txt" />
     <Content Include="tasks\Invoke-Sql\icon.png" />
@@ -126,6 +127,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>powershell -ExecutionPolicy ByPass -File "$(ProjectDir)utils\Update-AllTaskVersion.ps1"</PreBuildEvent>
+    <PreBuildEvent>ECHO "$(SolutionDir)bin\$(ConfigurationName)\ode.TaskLib.Powershell.dll" 
+ECHO "$(ProjectDir)tasks\Invoke-OldSchoolSonar\"
+xcopy "$(SolutionDir)bin\$(ConfigurationName)\ode.TaskLib.Powershell.dll" "$(ProjectDir)tasks\Invoke-OldSchoolSonar\" /y
+powershell -ExecutionPolicy ByPass -File "$(ProjectDir)utils\Update-AllTaskVersion.ps1"</PreBuildEvent>
   </PropertyGroup>
 </Project>

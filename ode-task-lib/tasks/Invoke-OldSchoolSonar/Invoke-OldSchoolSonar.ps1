@@ -10,6 +10,7 @@ param(
 
 Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
 Import-Module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
+Import-Module (Join-Path $PSScriptRoot "ode.TaskLib.Powershell.dll")
 
 function Get-EspacedArgument
 {
@@ -78,7 +79,8 @@ function Invoke-OldSchoolSonar {
 	#$commandExe = "& `"$scanner`" scan$command"
 	#Write-Verbose $commandExe
 	#Invoke-Expression "$commandExe"
-	$res = Start-Process -FilePath $scanner -ArgumentList $command -Wait -PassThru -WorkingDirectory $ProjectDirectory -Verbose
+	#$res = Start-Process -FilePath $scanner -ArgumentList $command -Wait -PassThru -WorkingDirectory $ProjectDirectory -Verbose
+	$res = Start-ProcessExtended -FilePath $scanner -Arguments $command -WorkingDirectory $ProjectDirectory -Verbose
 
 	Write-Verbose "Exit code : $($res.ExitCode)"
 

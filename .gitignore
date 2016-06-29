@@ -235,3 +235,4 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 *.md5
+/ode-task-lib/tasks/Invoke-OldSchoolSonar/ode.TaskLib.Powershell.dll
